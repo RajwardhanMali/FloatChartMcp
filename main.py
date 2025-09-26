@@ -366,6 +366,8 @@ async def cleanup():
         logger.info("Database connection pool closed")
 
 
+print("hello world")
+
 if __name__ == "__main__":
     print("Running server with Streamable HTTP transport")
     try:
