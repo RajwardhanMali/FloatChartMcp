@@ -19,9 +19,6 @@ import asyncpg
 from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
 
-# Load environment variables
-load_dotenv()
-
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -39,6 +36,8 @@ async def ensure_connection():
     """Ensure database connection is established."""
     global db_pool
     if not db_pool:
+        from dotenv import load_dotenv
+        load_dotenv()
         db_url = os.getenv("NEON_DB_URL")
         if not db_url:
             raise ValueError("NEON_DB_URL environment variable is required")
@@ -365,8 +364,6 @@ async def cleanup():
         await db_pool.close()
         logger.info("Database connection pool closed")
 
-
-print("hello world")
 
 if __name__ == "__main__":
     print("Running server with Streamable HTTP transport")
